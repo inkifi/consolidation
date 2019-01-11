@@ -1,6 +1,5 @@
 <?php
 namespace Inkifi\Consolidation\Controller\Adminhtml\Index;
-use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Item as OI;
 // 2019-01-11
