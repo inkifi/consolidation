@@ -30,15 +30,15 @@ final class Toolbar {
 	 *		return parent::_prepareLayout();
 	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Backend/Block/Widget/Container.php#L117-L126
 	 * @param Sb $sb
-	 * @param AbstractBlock $block
-	 * @param ButtonList $bl
+	 * @param AbstractBlock $b
+	 * @param ButtonList $l
 	 */
-	function beforePushButtons(Sb $sb, AbstractBlock $block, ButtonList $bl) {
+	function beforePushButtons(Sb $sb, AbstractBlock $b, ButtonList $l) {
 		if (df_action_is('sales_order_view')) {
-			$bl->add('inkifi__fix_the_customer', [
+			$l->add('inkifi__fix_the_customer', [
 				'class' => 'inkifi__fix_the_customer'
 				,'label' => __('Fix the Customer')
-				,'onclick' => 'setLocation(window.location.href)'
+				,'onclick' => "setLocation('{$b->getUrl('inkifi-consolidation')}')"
 			], -1);
 		}
 	}
