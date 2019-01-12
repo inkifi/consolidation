@@ -1,7 +1,6 @@
 <?php
 namespace Inkifi\Consolidation\Controller\Adminhtml\Index;
-use Magento\Sales\Model\Order as O;
-use Magento\Sales\Model\Order\Item as OI;
+use Inkifi\Consolidation\Processor as P;
 // 2019-01-11
 class Index extends \Magento\Backend\App\Action {
 	/**
@@ -14,19 +13,13 @@ class Index extends \Magento\Backend\App\Action {
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
 	 */
 	function execute() {
-		$o = df_order($oid = (int)df_request('order_id')); /** @var int $oid */ /** @var O $o */
-		if ((int)$cid = $o->getCustomerId()) { /** @var int|null $cid */
-			$oi = df_first(df_oqi_leafs($o)); /** @var OI $oi */
-			// 2019-01-11 A string like «5e2d6cd7-f32c-4c89-97a4-4acda92811fb».
-			$pid = $oi['mediaclip_project_id']; /** @var string $pid */
-			// 2019-01-11
-			// It could be a string like «f6549c2f-9230-f8e8-f1e4-625c7ac4f2f1»
-			// or a Magento customer ID like «65963».
-			$mcid = df_fetch_one('mediaclip', 'user_id', ['project_id' => $pid]);
-			if (df_is_guid($mcid)) {
-				$this->messageManager->addSuccess($mcid);
-			}
+		if (!P::s()->eligible()) {
+			$this->messageManager->addWarning('The customer is not eligible for consolidation.');
 		}
-		return df_redirect('sales/order/view', ['order_id' => $oid]);
+		else {
+			P::s()->consolidate();
+			$this->messageManager->addSuccess('The customer has been consilidated.');
+		}
+		return df_redirect('sales/order/view', ['order_id' => df_request('order_id')]);
 	}
 }

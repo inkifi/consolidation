@@ -1,6 +1,6 @@
 {
 	"name": "inkifi/consolidation"
-	,"version": "0.0.3"
+	,"version": "1.0.0"
 	,"description": "A customer consolidation module for inkifi.com"
 	,"type": "magento2-module"
 	,"homepage": "https://github.com/inkifi/consolidation"
@@ -11,7 +11,7 @@
 		,"homepage": "https://mage2.pro/users/dmitry_fedyuk"
 		,"role": "Developer"
 	}]
-	,"require": {"inkifi/mediaclip": ">=0.0.2", "mage2pro/core": ">=3.12.14"}
+	,"require": {"inkifi/mediaclip": ">=1.0.0", "mage2pro/core": ">=3.12.17"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Inkifi\\Consolidation\\": ""}}
 	,"keywords": ["Magento 2"]
 }

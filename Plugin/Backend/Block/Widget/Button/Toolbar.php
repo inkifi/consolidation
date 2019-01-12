@@ -1,5 +1,6 @@
 <?php
 namespace Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button;
+use Inkifi\Consolidation\Processor as P;
 use Magento\Backend\Block\Widget\Button\ButtonList;
 use Magento\Backend\Block\Widget\Button\Toolbar as Sb;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -34,10 +35,10 @@ final class Toolbar {
 	 * @param ButtonList $l
 	 */
 	function beforePushButtons(Sb $sb, AbstractBlock $b, ButtonList $l) {
-		if (df_action_is('sales_order_view')) {
+		if (df_action_is('sales_order_view') && P::s()->eligible()) {
 			$l->add('inkifi__fix_the_customer', [
 				'class' => 'inkifi__fix_the_customer'
-				,'label' => __('Fix the Customer')
+				,'label' => __('Consolidate')
 				,'onclick' => "setLocation('{$b->getUrl('inkifi-consolidation')}')"
 			], -1);
 		}
