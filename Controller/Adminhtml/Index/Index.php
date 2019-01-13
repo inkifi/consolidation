@@ -20,6 +20,6 @@ class Index extends \Magento\Backend\App\Action {
 			P::s()->consolidate();
 			$this->messageManager->addSuccess('The customer has been consilidated.');
 		}
-		return df_redirect('sales/order/view', ['order_id' => df_request('order_id')]);
+		return $this->_redirect('sales/order/view', ['order_id' => df_request('order_id')]);
 	}
 }
