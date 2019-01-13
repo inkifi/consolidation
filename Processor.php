@@ -21,8 +21,6 @@ final class Processor {
 	 */
 	function eligible() {
 		$r = false; /** @var bool $r */
-		// 2019-01-11 A string like «5e2d6cd7-f32c-4c89-97a4-4acda92811fb».
-		// 2019-01-11
 		// It could be a string like «f6549c2f-9230-f8e8-f1e4-625c7ac4f2f1»
 		// or a Magento customer ID like «65963».
 		if (df_is_guid($mcid = $this->mcid())) { /** @var string $mcid */
