@@ -36,8 +36,8 @@ final class Toolbar {
 	 */
 	function beforePushButtons(Sb $sb, AbstractBlock $b, ButtonList $l) {
 		if (df_action_is('sales_order_view') && P::s()->eligible()) {
-			$l->add('inkifi__fix_the_customer', [
-				'class' => 'inkifi__fix_the_customer'
+			$l->add('inkifi__consolidate', [
+				'class' => 'inkifi__consolidate'
 				,'label' => __('Consolidate')
 				,'onclick' => "setLocation('{$b->getUrl('inkifi-consolidation')}')"
 			], -1);
