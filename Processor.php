@@ -78,18 +78,29 @@ final class Processor {
 	 * @used-by updateDb()
 	 * @return string
 	 */
-	private function pid() {return dfc($this, function() {return
-		df_first(df_oqi_leafs($this->_o))['mediaclip_project_id']
-	;});}
+	private function pid() {return df_first($this->pids());}
+
+	/**
+	 * 2019-01-31
+	 * @used-by pid()
+	 * @used-by updateDb()
+	 * @return string[]
+	 */
+	private function pids() {return dfc($this, function() {return array_values(array_map(
+		'ikf_oi_pid', df_oqi_leafs($this->_o)
+	));});}
 
 	/**
 	 * 2019-01-14
 	 * @used-by consolidate()
 	 * @used-by eligible()
 	 */
-	private function updateDb() {df_conn()->update(
-		'mediaclip', ['user_id' => $this->cid()], ['? = project_id' => $this->pid()]
-	);}
+	private function updateDb() {
+		$cid = $this->cid(); /** @var string $cid */
+		foreach ($this->pids() as $pid) {  /** @var string $pid */
+			df_conn()->update('mediaclip', ['user_id' => $cid], ['? = project_id' => $pid]);
+		}
+	}
 
 	/**
 	 * 2019-01-12
