@@ -5,6 +5,7 @@ A customer consolidation module for [inkifi.com](https://inkifi.com).
 ## How to install
 ```
 bin/magento maintenance:enable
+composer clear-cache
 composer require inkifi/consolidation:*
 bin/magento setup:upgrade
 rm -rf var/di var/generation generated/code && bin/magento setup:di:compile
@@ -17,6 +18,7 @@ bin/magento cache:enable
 ```
 bin/magento maintenance:enable
 rm -rf composer.lock
+composer clear-cache
 composer update inkifi/consolidation
 bin/magento setup:upgrade
 rm -rf var/di var/generation generated/code && bin/magento setup:di:compile
